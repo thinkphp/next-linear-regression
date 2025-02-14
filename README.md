@@ -1,36 +1,139 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Linear Regression Web Application
 
-## Getting Started
+This web application demonstrates a simple linear regression model with a Flask backend for calculations and a Next.js frontend for visualization. Users can input their X and Y data points, and the application will calculate the regression line and display the results graphically.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- REST API for linear regression calculations
+- Real-time data visualization with Chart.js
+- Interactive user interface for data input
+- Cross-domain request support
+- Responsive design
+
+## Project Structure
+
+```
+linear-regression-project/
+├── backend/
+│   └── app.py
+└── frontend/
+    └── page.js
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Backend (Flask)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The backend is built with Flask and provides an endpoint for calculating linear regression coefficients.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Dependencies
 
-## Learn More
+- Flask
+- Flask-CORS
+- NumPy
 
-To learn more about Next.js, take a look at the following resources:
+### API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### POST /regression
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Calculates linear regression based on the provided X and Y values.
 
-## Deploy on Vercel
+**Request Body:**
+```json
+{
+  "x": [1, 2, 3, 4, 5],
+  "y": [2, 3, 5, 7, 11]
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Response:**
+```json
+{
+  "m": 2.2,
+  "b": -0.4,
+  "predictions": [1.8, 4.0, 6.2, 8.4, 10.6]
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Where:
+- `m`: Slope of the regression line
+- `b`: Y-intercept of the regression line
+- `predictions`: Predicted Y values for each X input
+
+## Frontend (Next.js)
+
+The frontend is built with Next.js and uses Chart.js for data visualization.
+
+### Dependencies
+
+- Next.js
+- React
+- Chart.js
+- react-chartjs-2
+- Axios
+
+### Features
+
+- Input fields for X and Y values (comma-separated)
+- Button to trigger regression calculation
+- Display of the regression equation
+- Interactive chart showing both original data points and regression line
+
+## How to Run
+
+### Backend Setup
+
+1. Navigate to the backend directory
+2. Install required packages:
+   ```
+   pip install flask flask-cors numpy
+   ```
+3. Run the Flask application:
+   ```
+   python app.py
+   ```
+   The server will start on http://127.0.0.1:5000
+
+### Frontend Setup
+
+1. Navigate to the frontend directory
+2. Install required packages:
+   ```
+   npm install
+   ```
+3. Run the development server:
+   ```
+   npm run dev
+   ```
+   The application will be available at http://localhost:3000
+
+## Usage
+
+1. Open the web application in your browser
+2. Enter comma-separated X values in the first input field (e.g., "1,2,3,4,5")
+3. Enter corresponding Y values in the second input field (e.g., "2,3,5,7,11")
+4. Click the "Calculează Regresia" (Calculate Regression) button
+5. View the regression equation and the chart displaying both your data points and the calculated regression line
+
+## How It Works
+
+1. When you submit your data, the frontend sends it to the Flask backend
+2. The backend calculates the slope (m) and y-intercept (b) using the least squares method
+3. The calculated coefficients and predictions are returned to the frontend
+4. The frontend displays the regression equation and renders a chart showing both the original data points and the regression line
+
+## Limitations
+
+- The application does not handle non-numeric inputs
+- There is no data validation or error handling for invalid inputs
+- The visualization is basic and does not include confidence intervals or other advanced statistics
+
+## Future Improvements
+
+- Add input validation
+- Support for multiple regression models
+- Export functionality for the results
+- More detailed statistical analysis
+- Responsive design for mobile devices
+
+## License
+
+This project is open-source and available under the MIT License.
