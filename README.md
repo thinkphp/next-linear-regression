@@ -2,6 +2,8 @@
 
 This web application demonstrates a simple linear regression model with a Flask backend for calculations and a Next.js frontend for visualization. Users can input their X and Y data points, and the application will calculate the regression line and display the results graphically.
 
+![Linear Regression](https://github.com/thinkphp/next-linear-regression/blob/main/Screenshot%20from%202025-02-14%2013-30-13.png?raw=true)
+
 ## Features
 
 - REST API for linear regression calculations
